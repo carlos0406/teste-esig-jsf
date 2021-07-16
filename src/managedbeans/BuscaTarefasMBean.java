@@ -10,6 +10,7 @@ import dao.Database;
 import javax.persistence.EntityManager;
 import dao.TarefaDAO;
 import dominio.Tarefa;
+import uteis.MetodosUteis;
 
 @SuppressWarnings("serial") /*Parar de exibir falsos erros*/
 @ManagedBean
@@ -99,7 +100,8 @@ public class BuscaTarefasMBean {
 				
 				em.getTransaction().begin();
 				t.setCompleta(!t.isCompleta());
-				em.merge(t);	
+				em.merge(t);
+				MetodosUteis.addMensagem("Situação da tarefa alterada com sucesso!");
 				em.getTransaction().commit();		
 			} catch (Exception e){
 				e.printStackTrace();
@@ -119,7 +121,8 @@ public class BuscaTarefasMBean {
 				
 				em.getTransaction().begin();
 				em.remove(t);	
-				em.getTransaction().commit();		
+				em.getTransaction().commit();
+				MetodosUteis.addMensagem("Tarefa deletada com sucesso!");
 			} catch (Exception e){
 				e.printStackTrace();
 				

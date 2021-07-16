@@ -45,7 +45,7 @@ public class CadastrarTarefaMBean {
 					gerenciador.merge(tarefa);
 
 				gerenciador.getTransaction().commit();
-				MetodosUteis.addMensagem("Seu cadastro est√° pronto!");
+				MetodosUteis.addMensagem("Seu cadastro est· pronto!");
 				
 
 			} catch (Exception e) {
