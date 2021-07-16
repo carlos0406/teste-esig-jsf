@@ -18,18 +18,20 @@ import uteis.MetodosUteis;
 public class BuscaTarefasMBean {
 	private List<Tarefa> tarefasEncontradas;
 	
-	private int limiteBusca;
+	private Integer limiteBusca;
 	private String tituloBusca;
 	private String responsavelBusca;
 	private boolean situacaoBusca;
 	
 	/** Permite o acesso ao banco. */
 	private TarefaDAO dao;
-	public int getLimiteBusca() {
+	
+
+	public Integer getLimiteBusca() {
 		return limiteBusca;
 	}
 
-	public void setLimiteBusca(int limiteBusca) {
+	public void setLimiteBusca(Integer limiteBusca) {
 		this.limiteBusca = limiteBusca;
 	}
 

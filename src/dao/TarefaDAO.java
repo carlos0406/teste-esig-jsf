@@ -9,7 +9,7 @@ import javax.persistence.Query;
 import dominio.Tarefa;
 
 public class TarefaDAO extends DAOGenerico{
-	public List<Tarefa> buscarTarefa(int limiteBusca,
+	public List<Tarefa> buscarTarefa(Integer limiteBusca,
 	String tituloBusca,
 	String responsavelBusca,
 	boolean situacaoBusca){
@@ -31,7 +31,7 @@ public class TarefaDAO extends DAOGenerico{
 		
 		Query q = em.createQuery(hql);
 		//setando parametros
-		if(limiteBusca!=0) {
+		if(limiteBusca!=null && limiteBusca!=0) {
 			q.setMaxResults(limiteBusca);
 		}
 		if(!responsavelBusca.isEmpty()&&responsavelBusca!=null) {

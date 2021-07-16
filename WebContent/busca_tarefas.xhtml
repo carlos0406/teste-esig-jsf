@@ -18,32 +18,64 @@
 		.titulo{
 			text-align: center;
 		}
-			
-	</style>
+		
+div.formulario{
+	width:1120px;
+	margin: 0 auto;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	
+}
+div.formulario div{
+	width: 100%;
+	display:grid;
+	grid-template-columns:1fr 5fr;
+	margin-bottom:1rem;
+	
+}
+div.formulario div label{
+	margin-top:1.5rem;
+	font-size: 1.5rem;
+}
+div.formulario div input{
+	height:3rem;
+}
 
+div.formulario div.double-input{
+	display: grid;
+	grid-template-columns:1fr 2fr 1fr 2fr;
+}
+
+input.botao{
+	width: 100%;
+}	
+	</style>
+	<h1 class="titulo">tarefas cadastradas</h1>	
 	<div id="conteudo"><br/><br/><br/><br/><br/><br/><br/>
 		<h:form enctype="multipart/form-data" >
 		
 			<h:messages/>
-			<h1 class="titulo">tarefas cadastradas</h1>	
+			
 			
 		</h:form>
 		
 		<h:form prependId="false" style=" margin: 0 0%;">
 		
-	<h:panelGrid columns="2" style="background-color: #ecf0f1; 
-                   bottom: 0px; left: 0px; right: 0px; top: 0px; 
-                   margin:auto">
-		
+	
+			<div class="formulario">
+			<div>
 			<h:outputLabel  for="limiteBusca" value="Limite :" />
 			<p:inputText id="limiteBusca" value="#{buscaTarefasMBean.limiteBusca}"/> 
+			</div>
 			
-			<h:outputLabel  for="tituloBusca" value="Titulo :" />
+			<div>
+				<h:outputLabel  for="tituloBusca" value="Titulo :" />
 			<p:inputText id="tituloBusca" value="#{buscaTarefasMBean.tituloBusca}"/> 
+			</div>
 			
-		
-                     
-			
+			<div>
 			<h:outputLabel  for="responsavelBusca" value="Responsavel:" />
 			<h:selectOneMenu value="#{buscaTarefasMBean.responsavelBusca}"
 					id="responsavelBusca" >
@@ -60,16 +92,22 @@
 						<f:selectItem itemValue="Pessoa5" itemLabel="Pessoa5"
 						itemDescription="Pessoa5" />
 				</h:selectOneMenu>
-				<h:outputLabel  for="situacaoBusca" value="Situacao:" />
+			</div>
+            <div>
+            <h:outputLabel  for="situacaoBusca" value="Situacao:" />
 				<h:selectOneMenu value="#{buscaTarefasMBean.situacaoBusca}"
 					id="situacaoBusca" >
 						<f:selectItem itemValue="true" itemLabel="Concluida"
 						itemDescription="Concluida" />
 						<f:selectItem itemValue="false" itemLabel="Em Andamento"
 						itemDescription="Em Andamento" />
-				</h:selectOneMenu>
+				</h:selectOneMenu>    
+			
+			</div>
+				
 			<h:commandButton  class="botao" value="Buscar" action="#{buscaTarefasMBean.buscar}"/>    
-		</h:panelGrid>
+			</div>
+			
 			<h:panelGroup rendered="#{empty  buscaTarefasMBeanMBean.tarefasEncontradas}">
 			<br/>
 				<h3>Por favor faça uma busca.</h3>

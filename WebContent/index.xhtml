@@ -15,6 +15,38 @@ span {
 table {
 margin:0 auto;
 }
+
+div.formulario{
+	width:1120px;
+	margin: 0 auto;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	
+}
+div.formulario div{
+	width: 100%;
+	display:grid;
+	grid-template-columns:1fr 5fr;
+	
+}
+div.formulario div label{
+	margin-top:1.5rem;
+	font-size: 1.5rem;
+}
+div.formulario div input{
+	height:3rem;
+}
+
+div.formulario div.double-input{
+	display: grid;
+	grid-template-columns:1fr 2fr 1fr 2fr;
+}
+
+input.botao{
+	width: 100%;
+}
 </style>
 
 	<div id="conteudo">
@@ -26,26 +58,29 @@ margin:0 auto;
 		<h:inputHidden value="#{cadastrarTarefaMBean.tarefa.completa}" />
 			<h:messages />
 
-			<h:panelGrid columns="2"
-				style="background-color: #ecf0f1; 
-                   bottom: 0px; left: 0px; right: 0px; top: 0px; 
-                   width: 200px">
-				<h:outputLabel for="titulo" value="titulo: *" />
-				<h:inputText id="titulo" value="#{cadastrarTarefaMBean.tarefa.titulo}"/>
-				
+			<div class="formulario">
+				<div>
+					<h:outputLabel for="titulo" value="titulo: *" />
+					<h:inputText id="titulo" value="#{cadastrarTarefaMBean.tarefa.titulo}"/>
+				</div>
+				<div>
 				<h:outputLabel for="descricao" value="descricao: *" />
 				<h:inputText id="descricao" value="#{cadastrarTarefaMBean.tarefa.descricao}"/>
-
-				<p:outputLabel for="data" value="Data: *" />
-				<p:calendar id="data" value="#{cadastrarTarefaMBean.tarefa.deadline}"/>
-
-				<h:outputLabel for="turno" value="Turno: *" />
-				<h:selectOneRadio id="turno"
-					value="#{cadastrarTarefaMBean.tarefa.prioridade}">
-					<f:selectItem itemLabel="Alta" itemValue="Alta" />
-					<f:selectItem itemLabel="Media" itemValue="Media" />
-					<f:selectItem itemLabel="Baixa" itemValue="Baixa" />
-				</h:selectOneRadio>
+				</div>
+				<div class="double-input">
+					<h:outputLabel for="data" value="Deadline: *" />
+					<p:calendar id="data" value="#{cadastrarTarefaMBean.tarefa.deadline}"/>
+					<h:outputLabel for="prioridade" value="Prioridade: *" />
+					<h:selectOneRadio id="prioridade"
+						value="#{cadastrarTarefaMBean.tarefa.prioridade}">
+						<f:selectItem itemLabel="Alta" itemValue="Alta" />
+						<f:selectItem itemLabel="Media" itemValue="Media" />
+						<f:selectItem itemLabel="Baixa" itemValue="Baixa" />
+					</h:selectOneRadio>
+				
+				</div>
+				
+				<div>
 				<h:outputLabel for="responsavel" value="Responsavel: *" />
 				<h:selectOneMenu value="#{cadastrarTarefaMBean.tarefa.responsavel}"
 					id="responsavel" >
@@ -62,15 +97,10 @@ margin:0 auto;
 						<f:selectItem itemValue="Pessoa5" itemLabel="Pessoa5"
 						itemDescription="Pessoa5" />
 				</h:selectOneMenu>
-
+				</div>
 				<h:commandButton class="botao" value="Enviar"
 					action="#{cadastrarTarefaMBean.cadastrar}" />
-
-
-
-
-
-			</h:panelGrid>
+			</div>
 		
 
 		</h:form>

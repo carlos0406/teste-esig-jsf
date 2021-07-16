@@ -33,33 +33,60 @@ public class CadastrarTarefaMBean {
 	}
 
 	public String cadastrar() {
-			// verificando se o usu√°rio anexou foto
 			EntityManager gerenciador = Database.getInstance().getEntityManager();
 			gerenciador.getTransaction().begin();
+			boolean erro=false;
 			
-			
-			try {
-				if (tarefa.getId() == 0)
-					gerenciador.persist(tarefa);
-				else
-					gerenciador.merge(tarefa);
-
-				gerenciador.getTransaction().commit();
-				MetodosUteis.addMensagem("Seu cadastro est· pronto!");
-				
-
-			} catch (Exception e) {
-				e.printStackTrace();
-
+			if (MetodosUteis.estaVazia(tarefa.getTitulo())) {
+				MetodosUteis.addMensagem("Campo titulo obrigatorio!");
+				erro = true;
+			}
+			if (MetodosUteis.estaVazia(tarefa.getDescricao())) {
+				MetodosUteis.addMensagem("Campo descricao obrigatorio!");
+				erro = true;
+			}
+			if (MetodosUteis.estaVazia(tarefa.getPrioridade())) {
+				MetodosUteis.addMensagem("Campo prioridade obrigatorio!");
+				erro = true;
+			}
+			if (MetodosUteis.estaVazia(tarefa.getResponsavel())) {
+				MetodosUteis.addMensagem("Campo responsavel obrigatorio!");
+				erro = true;
+			}
+			if (tarefa.getDeadline()==null) {
+				MetodosUteis.addMensagem("Campo deadline obrigatorio!");
+				erro = true;
+			}
+			if(erro) {
 				if (gerenciador.getTransaction().isActive()) {
 					gerenciador.getTransaction().rollback();
 				}
+				return null;
+			}else {
+				try {
+					if (tarefa.getId() == 0)
+						gerenciador.persist(tarefa);
+					else
+						gerenciador.merge(tarefa);
+
+					gerenciador.getTransaction().commit();
+					MetodosUteis.addMensagem("Seu cadastro est· pronto!");
+					
+
+				} catch (Exception e) {
+					e.printStackTrace();
+
+					if (gerenciador.getTransaction().isActive()) {
+						gerenciador.getTransaction().rollback();
+					}
+				}
+
+			
+
+			tarefa = new Tarefa();
+			return null;
 			}
-
-		
-
-		tarefa = new Tarefa();
-		return null;
+			
 	}
 
 	public Tarefa gettarefa() {
